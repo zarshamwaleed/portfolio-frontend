@@ -52,7 +52,7 @@ const Navbar = () => {
           </div>
 
           {/* Navigation Links */}
-          <div className="flex space-x-8 pl-20">
+          <div className="flex space-x-8 pl-28">
             {navLinks.map((link) => (
               <a
                 key={link.name}
