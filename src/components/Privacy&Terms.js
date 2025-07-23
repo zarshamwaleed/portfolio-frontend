@@ -147,17 +147,25 @@ const PrivacyTermsPage = () => {
             If you have any questions or concerns about our privacy policy or terms of service, please don't hesitate to contact us.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <a
-              href="mailto:contact@yourwebsite.com"
-              className="inline-flex items-center gap-2 bg-white text-slate-900 px-6 py-3 rounded-lg font-medium hover:bg-slate-100 transition-colors"
-            >
-              <Mail className="w-5 h-5" />
-              Email Us
-            </a>
-            <button className="inline-flex items-center gap-2 border border-white text-white px-6 py-3 rounded-lg font-medium hover:bg-white hover:text-slate-900 transition-colors">
-              <FileText className="w-5 h-5" />
-              Download PDF
-            </button>
+        <a
+  href="https://mail.google.com/mail/?view=cm&fs=1&to=zarshamwaleedbutt@gmail.com"
+  target="_blank"
+  rel="noopener noreferrer"
+  className="inline-flex items-center gap-2 bg-white text-slate-900 px-6 py-3 rounded-lg font-medium hover:bg-slate-100 transition-colors"
+>
+  <Mail className="w-5 h-5" />
+  Email Us
+</a>
+
+          <a
+  href="/Zarsham-Resume.pdf"
+  download
+  className="inline-flex items-center gap-2 border border-white text-white px-6 py-3 rounded-lg font-medium hover:bg-white hover:text-slate-900 transition-colors"
+>
+  <FileText className="w-5 h-5" />
+  Download Resume
+</a>
+
           </div>
         </div>
       </section>
@@ -178,11 +186,11 @@ const PrivacyPolicyContent = () => (
     <div className="flex items-center gap-6 text-sm text-gray-400">
       <div className="flex items-center gap-2">
         <Calendar className="w-4 h-4" />
-        Last Updated: January 15, 2025
+        Last Updated: July 24, 2025
       </div>
       <div className="flex items-center gap-2">
         <Globe className="w-4 h-4" />
-        Effective Date: January 15, 2025
+        Effective Date: July 24, 2025
       </div>
     </div>
   </div>
@@ -357,9 +365,9 @@ const PrivacyPolicyContent = () => (
         If you have any questions about this Privacy Policy or our privacy practices, please contact us at:
       </p>
       <div className="space-y-2 text-gray-300">
-        <p><strong>Email:</strong> privacy@yourwebsite.com</p>
-        <p><strong>Address:</strong> Your Business Address</p>
-        <p><strong>Phone:</strong> +1 (555) 123-4567</p>
+        <p><strong>Email:</strong> zarshamwaleedbutt@gmail.com</p>
+       
+        <p><strong>Phone:</strong> +92 304 2825000</p>
       </div>
     </div>
   </section>
@@ -380,11 +388,11 @@ const TermsOfServiceContent = () => (
     <div className="flex items-center gap-6 text-sm text-gray-400">
       <div className="flex items-center gap-2">
         <Calendar className="w-4 h-4" />
-        Last Updated: January 15, 2025
+        Last Updated: July 24, 2025
       </div>
       <div className="flex items-center gap-2">
         <Globe className="w-4 h-4" />
-        Effective Date: January 15, 2025
+        Effective Date: July 24, 2025
       </div>
     </div>
   </div>

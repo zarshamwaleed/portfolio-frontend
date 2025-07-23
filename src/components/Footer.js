@@ -49,7 +49,7 @@ const Footer = () => {
       title: 'Resources',
       links: [
         { name: 'Resume', href: '/Zarsham-Resume.pdf' },
-        { name: 'Blog', href: '/blog' },
+        { name: 'Services', href: '/services' },
        
       ],
     },
@@ -97,49 +97,51 @@ const Footer = () => {
           {/* Footer links */}
          {footerLinks.map((section) => (
   <div
-    key={section.title}
-    className={`space-y-4 ${
-      section.title === 'Quick Links' ? 'flex justify-center w-full' : ''
-    }`}
-  >
-    {/* Quick Links section with 2-column grid */}
-    {section.title === 'Quick Links' ? (
-      <div>
-       <h3 className="text-white font-semibold mb-4 text-left pl-6">Quick Links</h3>
-
-        <div className="grid grid-cols-2 gap-x-6 gap-y-2">
-          {section.links.map((link) => (
+  key={section.title}
+  className={`space-y-4 ${
+    section.title === 'Quick Links'
+      ? 'flex justify-center w-full'
+      : section.title === 'Resources'
+      ? 'pl-16' // Increased left padding for more right shift
+      : ''
+  }`}
+>
+  {/* Quick Links section with 2-column grid */}
+  {section.title === 'Quick Links' ? (
+    <div>
+      <h3 className="text-white font-semibold mb-4 text-left pl-6">Quick Links</h3>
+      <div className="grid grid-cols-2 gap-x-6 gap-y-2">
+        {section.links.map((link) => (
+          <a
+            key={link.name}
+            href={link.href}
+            className="text-slate-400 hover:text-white text-sm transition-colors"
+          >
+            {link.name}
+          </a>
+        ))}
+      </div>
+    </div>
+  ) : (
+    <>
+      <h4 className="text-sm font-semibold uppercase tracking-wider dark:text-gray-200 text-gray-800">
+        {section.title}
+      </h4>
+      <ul className="space-y-2">
+        {section.links.map((link) => (
+          <li key={link.name}>
             <a
-              key={link.name}
               href={link.href}
-              className="text-slate-400 hover:text-white text-sm transition-colors"
+              className="text-sm hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-300"
             >
               {link.name}
             </a>
-          ))}
-        </div>
-      </div>
-    ) : (
-      // All other sections (default layout)
-      <>
-        <h4 className="text-sm font-semibold uppercase tracking-wider dark:text-gray-200 text-gray-800">
-          {section.title}
-        </h4>
-        <ul className="space-y-2">
-          {section.links.map((link) => (
-            <li key={link.name}>
-              <a
-                href={link.href}
-                className="text-sm hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-300"
-              >
-                {link.name}
-              </a>
-            </li>
-          ))}
-        </ul>
-      </>
-    )}
-  </div>
+          </li>
+        ))}
+      </ul>
+    </>
+  )}
+</div>
 ))}
 
         

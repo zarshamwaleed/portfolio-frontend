@@ -212,7 +212,7 @@ const projects = [
       features: ["Interactive Menu", "Dynamic Billing", "Payment Options", "Receipt Generation", "Order Management"],
       icon: Utensils,
       gradient: "from-amber-500 to-orange-600",
-      images: []
+      // images: []
     }
   ];
 
@@ -336,13 +336,16 @@ const categories = [
                 <span>View Live</span>
               </a>
             )}
-            <button 
-              onClick={() => openGallery(project.id)}
-              className="flex-1 px-4 py-2 bg-white/10 text-gray-200 rounded-lg text-sm font-semibold flex items-center justify-center space-x-2 hover:bg-white/20 transition-colors"
-            >
-              <Palette size={16} />
-              <span>View Glimpse</span>
-            </button>
+         {project.id !== 7 && (
+  <button 
+    onClick={() => openGallery(project.id)}
+    className="flex-1 px-4 py-2 bg-white/10 text-gray-200 rounded-lg text-sm font-semibold flex items-center justify-center space-x-2 hover:bg-white/20 transition-colors"
+  >
+    <Palette size={16} />
+    <span>View Glimpse</span>
+  </button>
+)}
+
           </div>
         </div>
       </div>

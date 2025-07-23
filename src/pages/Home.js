@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { BookOpen, CheckCircle, Zap } from "lucide-react";
-import { Link } from "react-router-dom";
+import { Link } from 'react-router-dom';
+
+
 import {
   FiDownload,
   FiArrowRight,
@@ -205,7 +207,7 @@ const ProfessionalHero = () => {
                   <div className="flex items-center gap-1 text-yellow-400">
                     <MapPin className="w-4 h-4" />
                     <span className="text-sm font-medium">
-                      Gujranwala / Islamabad, PK
+                      Pakistan
                     </span>
                   </div>
                 </div>
@@ -296,10 +298,13 @@ const ProfessionalHero = () => {
                     <h3 className="text-white font-semibold text-lg">
                       Recent Work
                     </h3>
-                    <button className="text-blue-400 hover:text-blue-300 text-sm font-medium flex items-center gap-1 group">
-                      View All
-                      <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                    </button>
+                  <Link
+  to="/projects"
+  className="text-blue-400 hover:text-blue-300 text-sm font-medium flex items-center gap-1 group"
+>
+  View All
+  <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+</Link>
                   </div>
 
                   <div className="space-y-3">

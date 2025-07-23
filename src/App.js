@@ -13,6 +13,7 @@ import CertificationPage from "./sections/Certificates";
 import ReviewPage from "./sections/review";
 import BlogPage from "./pages/Blog";
 import PrivacyPolicy from "./components/Privacy&Terms";
+import ServicesPage from "./sections/Services";
 
 export default function App() {
   return (
@@ -31,6 +32,7 @@ export default function App() {
              <Route path="/reviews" element={<ReviewPage />} /> 
                <Route path="/blog" element={< BlogPage/>} /> 
                <Route path="/privacy&terms" element={< PrivacyPolicy/>} /> 
+               <Route path="/services" element={< ServicesPage/>} /> 
            
         </Routes>
       </div>
