@@ -194,7 +194,7 @@ const handleSubmitReview = async (e) => {
 >
   <div className="max-w-7xl mx-auto px-6">
     <div className="flex flex-col md:flex-row justify-between items-center gap-4 mb-8">
-    <div className="flex flex-col sm:flex-row gap-4 w-full md:w-auto">
+   <div className="flex flex-col sm:flex-row gap-4 w-full md:w-auto">
   <div className="relative">
     <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-slate-300" />
     <input
@@ -206,30 +206,38 @@ const handleSubmitReview = async (e) => {
     />
   </div>
 
+  {/* Rating Filter */}
   <select
     className="px-4 py-2 bg-white/10 text-white border border-slate-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none"
     value={filterRating}
     onChange={(e) => setFilterRating(e.target.value)}
   >
-    <option value="all">All Ratings</option>
+    <option className="bg-slate-800 text-white" value="all">All Ratings</option>
     {[5, 4, 3, 2, 1].map((r) => (
-      <option key={r} value={r}>
+      <option
+        key={r}
+        value={r}
+        className="bg-slate-800 text-white hover:bg-slate-700"
+      >
         {r} Star{r > 1 && 's'}
       </option>
     ))}
   </select>
 
+  {/* Sort Dropdown */}
   <select
     className="px-4 py-2 bg-white/10 text-white border border-slate-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none"
     value={sortBy}
     onChange={(e) => setSortBy(e.target.value)}
   >
-    <option value="newest">Newest First</option>
-    <option value="oldest">Oldest First</option>
-    <option value="highest">Highest Rating</option>
-    <option value="helpful">Most Helpful</option>
+    <option className="bg-slate-800 text-white" value="">Sort By</option>
+    <option className="bg-slate-800 text-white hover:bg-slate-700" value="newest">Newest First</option>
+    <option className="bg-slate-800 text-white hover:bg-slate-700" value="oldest">Oldest First</option>
+    <option className="bg-slate-800 text-white hover:bg-slate-700" value="highest">Highest Rating</option>
+    <option className="bg-slate-800 text-white hover:bg-slate-700" value="helpful">Most Helpful</option>
   </select>
 </div>
+
 
       <button
         onClick={() => setShowReviewForm(!showReviewForm)}
