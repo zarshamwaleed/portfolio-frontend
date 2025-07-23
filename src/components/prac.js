@@ -1,187 +1,335 @@
-import { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
 import {
-  Mail,
-  Phone,
-  MapPin,
-  Github,
-  Linkedin,
-  Twitter,
-  Clock,
-  CalendarDays,
-  Contact2,
-  Globe
+  Star, ThumbsUp, Plus, Calendar, Verified, Quote, Search, TrendingUp,
 } from 'lucide-react';
 
-const Contact = () => {
-  const [isVisible, setIsVisible] = useState(false);
+const ReviewPage = () => {
+  const [reviews, setReviews] = useState([]);
+  const [showReviewForm, setShowReviewForm] = useState(false);
+  const [filterRating, setFilterRating] = useState('all');
+  const [sortBy, setSortBy] = useState('newest');
+  const [searchTerm, setSearchTerm] = useState('');
+
+  const [newReview, setNewReview] = useState({
+    name: '',
+    role: '',
+    company: '',
+    rating: 0,
+    review: '',
+    project: '',
+  });
+
+  const API_BASE = 'https://portfolio-backend-omega-fawn.vercel.app/api/reviews';
+
+  const fetchReviews = async () => {
+    try {
+      const res = await axios.get(API_BASE);
+      setReviews(res.data);
+    } catch (err) {
+      console.error('Failed to fetch reviews:', err.message);
+    }
+  };
 
   useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) setIsVisible(true);
-      },
-      { threshold: 0.1 }
-    );
-    const contactSection = document.getElementById('contact');
-    if (contactSection) observer.observe(contactSection);
-    return () => observer.disconnect();
+    fetchReviews();
   }, []);
 
-  const contactChannels = [
-    { 
-      icon: Mail, 
-      title: 'Electronic Mail', 
-      value: 'zarsham@example.com', 
-      action: 'Drop a line',
-      href: 'mailto:zarsham@example.com',
-      bg: 'bg-gradient-to-br from-rose-100 to-pink-200 dark:from-rose-900/50 dark:to-pink-900/50'
-    },
-    { 
-      icon: Phone, 
-      title: 'Voice Communication', 
-      value: '+92 304 2825000', 
-      action: 'Call directly',
-      href: 'tel:+923042825000',
-      bg: 'bg-gradient-to-br from-teal-100 to-cyan-200 dark:from-teal-900/50 dark:to-cyan-900/50'
-    },
-    { 
-      icon: MapPin, 
-      title: 'Geographical Presence', 
-      value: 'Pakistan', 
-      action: 'View map',
-      href: 'https://maps.google.com/?q=Pakistan',
-      bg: 'bg-gradient-to-br from-indigo-100 to-blue-200 dark:from-indigo-900/50 dark:to-blue-900/50'
-    }
-  ];
+  const averageRating =
+    reviews.reduce((acc, review) => acc + review.rating, 0) / reviews.length || 0;
+  const totalReviews = reviews.length;
 
-  const digitalPresence = [
-    { 
-      icon: Github, 
-      platform: 'Code Repository', 
-      handle: '@zarsham', 
-      href: 'https://github.com/zarsham',
-      color: 'text-gray-800 dark:text-gray-200 hover:bg-gray-800 hover:text-white'
-    },
-    { 
-      icon: Linkedin, 
-      platform: 'Professional Network', 
-      handle: '/in/zarsham', 
-      href: 'https://linkedin.com/in/zarsham',
-      color: 'text-blue-600 dark:text-blue-400 hover:bg-blue-600 hover:text-white'
-    },
-    { 
-      icon: Twitter, 
-      platform: 'Microblogging', 
-      handle: '@zarsham', 
-      href: 'https://twitter.com/zarsham',
-      color: 'text-sky-500 dark:text-sky-400 hover:bg-sky-500 hover:text-white'
-    },
-    { 
-      icon: Globe, 
-      platform: 'Personal Website', 
-      handle: 'zarsham.dev', 
-      href: 'https://zarsham.dev',
-      color: 'text-purple-600 dark:text-purple-400 hover:bg-purple-600 hover:text-white'
-    }
-  ];
+  const ratingDistribution = [5, 4, 3, 2, 1].map((rating) => {
+    const count = reviews.filter((review) => review.rating === rating).length;
+    return {
+      rating,
+      count,
+      percentage: totalReviews > 0 ? (count / totalReviews) * 100 : 0,
+    };
+  });
 
-  const availability = [
-    { day: 'Monday - Thursday', hours: '9:00 - 17:00 PKT' },
-    { day: 'Friday', hours: '9:00 - 12:00 PKT' },
-    { day: 'Weekend', hours: 'By appointment' }
-  ];
+  const handleStarClick = (rating) => {
+    setNewReview((prev) => ({ ...prev, rating }));
+  };
+
+  const handleSubmitReview = async (e) => {
+    e.preventDefault();
+    if (newReview.rating === 0) return;
+
+    const reviewToPost = {
+      ...newReview,
+      date: new Date().toISOString().split('T')[0],
+      avatar: newReview.name.split(' ').map((n) => n[0]).join('').toUpperCase(),
+      helpful: 0,
+      verified: false,
+    };
+
+    try {
+      const res = await axios.post(API_BASE, reviewToPost);
+      setReviews((prev) => [res.data, ...prev]);
+      setNewReview({ name: '', role: '', company: '', rating: 0, review: '', project: '' });
+      setShowReviewForm(false);
+    } catch (err) {
+      console.error('Error submitting review:', err.message);
+    }
+  };
+
+  const handleHelpfulClick = async (id, helpfulCount) => {
+    try {
+      const res = await axios.patch(`${API_BASE}/${id}/helpful`, {
+        helpful: helpfulCount + 1,
+      });
+
+      setReviews((prev) =>
+        prev.map((review) => (review._id === id ? res.data : review))
+      );
+    } catch (err) {
+      console.error('Failed to update helpful count:', err.message);
+    }
+  };
+
+  const filteredReviews = reviews
+    .filter((review) => filterRating === 'all' || review.rating === parseInt(filterRating))
+    .filter(
+      (review) =>
+        review.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        review.company.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        review.review.toLowerCase().includes(searchTerm.toLowerCase())
+    )
+    .sort((a, b) => {
+      if (sortBy === 'newest') return new Date(b.date) - new Date(a.date);
+      if (sortBy === 'oldest') return new Date(a.date) - new Date(b.date);
+      if (sortBy === 'highest') return b.rating - a.rating;
+      if (sortBy === 'helpful') return b.helpful - a.helpful;
+      return 0;
+    });
+
+  const StarRating = ({ rating, size = 'w-5 h-5', interactive = false, onStarClick = null }) => (
+    <div className="flex space-x-1">
+      {[1, 2, 3, 4, 5].map((star) => (
+        <Star
+          key={star}
+          className={`${size} ${
+            star <= rating ? 'text-yellow-400 fill-yellow-400' : 'text-gray-300'
+          } ${interactive ? 'cursor-pointer hover:text-yellow-400 transition-colors' : ''}`}
+          onClick={() => interactive && onStarClick && onStarClick(star)}
+        />
+      ))}
+    </div>
+  );
 
   return (
-    <section
-      id="contact"
-      className="min-h-screen py-20 bg-white dark:bg-gray-950"
-    >
-      <div className="max-w-5xl mx-auto px-6 lg:px-8">
-   {/* Header */}
-        <div
-          className={`text-center mb-20 transition-all duration-1000 ${
-            isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-5'
-          }`}
-        >
-          <h2 className="text-4xl sm:text-5xl font-bold font-mono bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 bg-clip-text text-transparent">
-            {'<LetsWorkTogether />'}
-          </h2>
-          <p className="text-lg text-gray-700 dark:text-gray-300 mt-4">
-            Let’s connect and build something remarkable together.
-          </p>
-          <div className="w-24 h-1 mt-6 bg-gradient-to-r from-blue-400 to-purple-400 mx-auto rounded-full" />
-        </div>
-
-        {/* Contact Cards */}
-        <div className={`grid md:grid-cols-3 gap-6 mb-16 transition-all duration-1000 delay-150 ${isVisible ? 'opacity-100' : 'opacity-0'}`}>
-          {contactChannels.map((channel, index) => (
-            <a
-              key={index}
-              href={channel.href}
-              className={`${channel.bg} p-6 rounded-xl border border-gray-200 dark:border-gray-800 hover:shadow-lg transition-all duration-300 hover:-translate-y-1`}
-            >
-              <div className="flex items-center mb-4">
-                <channel.icon className="w-8 h-8 mr-3 text-gray-700 dark:text-gray-300" />
-                <h3 className="text-lg font-medium text-gray-800 dark:text-gray-200">{channel.title}</h3>
+   <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-blue-50">
+        {/* Header */}
+        <div className="relative bg-gradient-to-r from-slate-900 via-slate-800 to-slate-900 overflow-hidden">
+          <div className="absolute inset-0 bg-black/20"></div>
+          <div className="relative max-w-7xl mx-auto px-6 py-20 text-center">
+            <div className="flex justify-center mb-6">
+              <div className="p-4 bg-white/10 rounded-full backdrop-blur-sm">
+                <Quote className="w-12 h-12 text-white" />
               </div>
-              <p className="text-2xl font-bold mb-3 text-gray-900 dark:text-white">{channel.value}</p>
-              <div className="flex items-center text-sm font-medium text-gray-700 dark:text-gray-400">
-                {channel.action} →
-              </div>
-            </a>
-          ))}
+            </div>
+            <h1 className="text-4xl md:text-5xl font-bold text-white mb-4">getFeedback()</h1>
+            <p className="text-xl text-slate-300 max-w-3xl mx-auto">
+              Discover what clients say about their experience working with us
+            </p>
+          </div>
         </div>
-
-        {/* Digital Presence */}
-        <div className={`mb-16 transition-all duration-1000 delay-300 ${isVisible ? 'opacity-100' : 'opacity-0'}`}>
-          <h3 className="text-xl font-semibold mb-6 text-gray-800 dark:text-gray-200 flex items-center">
-            <Contact2 className="w-5 h-5 mr-2" />
-            Digital Presence
-          </h3>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-            {digitalPresence.map((platform, index) => (
-              <a
-                key={index}
-                href={platform.href}
-                target="_blank"
-                rel="noopener noreferrer"
-                className={`${platform.color} p-4 rounded-lg border border-gray-200 dark:border-gray-800 transition-all duration-300 flex flex-col items-center text-center`}
+  
+        {/* Statistics */}
+        <div className="max-w-7xl mx-auto px-6 -mt-10 relative z-10">
+          <div className="bg-white rounded-2xl shadow-xl p-8 border border-slate-200">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+              <div className="text-center">
+                <div className="text-4xl font-bold text-slate-800 mb-2">{averageRating.toFixed(1)}</div>
+                <StarRating rating={Math.round(averageRating)} />
+                <div className="text-sm text-slate-600 mt-2">Average Rating</div>
+              </div>
+              <div className="text-center">
+                <div className="text-4xl font-bold text-slate-800 mb-2">{totalReviews}</div>
+                <TrendingUp className="w-6 h-6 text-green-500 mx-auto" />
+                <div className="text-sm text-slate-600 mt-2">Total Reviews</div>
+              </div>
+              <div className="space-y-2">
+                {ratingDistribution.map(({ rating, count, percentage }) => (
+                  <div key={rating} className="flex items-center space-x-2">
+                    <div className="flex items-center space-x-1 w-12">
+                      <span className="text-sm font-medium">{rating}</span>
+                      <Star className="w-3 h-3 text-yellow-400 fill-yellow-400" />
+                    </div>
+                    <div className="flex-1 h-2 bg-slate-200 rounded-full overflow-hidden">
+                      <div
+                        className="h-full bg-gradient-to-r from-yellow-400 to-yellow-500"
+                        style={{ width: `${percentage}%` }}
+                      ></div>
+                    </div>
+                    <span className="text-xs text-slate-600 w-8">{count}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+  
+        {/* Filters */}
+        <div className="max-w-7xl mx-auto px-6 py-8">
+          <div className="flex flex-col md:flex-row justify-between items-center gap-4 mb-8">
+            <div className="flex flex-col sm:flex-row gap-4 w-full md:w-auto">
+              <div className="relative">
+                <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-slate-400" />
+                <input
+                  type="text"
+                  placeholder="Search reviews..."
+                  className="pl-10 pr-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                  value={searchTerm}
+                  onChange={(e) => setSearchTerm(e.target.value)}
+                />
+              </div>
+              <select
+                className="px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+                value={filterRating}
+                onChange={(e) => setFilterRating(e.target.value)}
               >
-                <platform.icon className="w-6 h-6 mb-2" />
-                <span className="text-xs font-medium">{platform.platform}</span>
-                <span className="text-sm font-bold">{platform.handle}</span>
-              </a>
+                <option value="all">All Ratings</option>
+                {[5, 4, 3, 2, 1].map((r) => (
+                  <option key={r} value={r}>
+                    {r} Star{r > 1 && 's'}
+                  </option>
+                ))}
+              </select>
+              <select
+                className="px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+                value={sortBy}
+                onChange={(e) => setSortBy(e.target.value)}
+              >
+                <option value="newest">Newest First</option>
+                <option value="oldest">Oldest First</option>
+                <option value="highest">Highest Rating</option>
+                <option value="helpful">Most Helpful</option>
+              </select>
+            </div>
+            <button
+              onClick={() => setShowReviewForm(!showReviewForm)}
+              className="flex items-center space-x-2 bg-gradient-to-r from-blue-600 to-blue-700 text-white px-6 py-2 rounded-lg hover:shadow-lg transition-all duration-300 transform hover:scale-105"
+            >
+              <Plus className="w-4 h-4" />
+              <span>Write a Review</span>
+            </button>
+          </div>
+  
+          {/* Review Form */}
+          {showReviewForm && (
+            <form onSubmit={handleSubmitReview} className="bg-white rounded-2xl shadow-lg p-8 mb-8 border border-slate-200 space-y-6">
+              <h3 className="text-2xl font-bold text-slate-800 mb-6">Share Your Experience</h3>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                {['name', 'role', 'company'].map((field) => (
+                  <input
+                    key={field}
+                    type="text"
+                    placeholder={`Your ${field.charAt(0).toUpperCase() + field.slice(1)}${field === 'name' ? ' *' : ''}`}
+                    className="px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+                    value={newReview[field]}
+                    onChange={(e) => setNewReview((prev) => ({ ...prev, [field]: e.target.value }))}
+                    required={field === 'name'}
+                  />
+                ))}
+              </div>
+              <input
+                type="text"
+                placeholder="Project Name"
+                className="w-full px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+                value={newReview.project}
+                onChange={(e) => setNewReview((prev) => ({ ...prev, project: e.target.value }))}
+              />
+              <div>
+                <label className="block text-sm font-medium text-slate-700 mb-2">Rating *</label>
+                <StarRating
+                  rating={newReview.rating}
+                  size="w-8 h-8"
+                  interactive={true}
+                  onStarClick={handleStarClick}
+                />
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-slate-700 mb-2">Your Review *</label>
+                <textarea
+                  required
+                  rows={4}
+                  placeholder="Share your experience..."
+                  className="w-full px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 resize-none"
+                  value={newReview.review}
+                  onChange={(e) => setNewReview((prev) => ({ ...prev, review: e.target.value }))}
+                ></textarea>
+              </div>
+              <div className="flex gap-4">
+                <button type="submit" className="bg-blue-600 text-white px-6 py-3 rounded-lg hover:shadow-lg">
+                  Submit Review
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setShowReviewForm(false)}
+                  className="bg-slate-200 text-slate-700 px-6 py-3 rounded-lg hover:bg-slate-300"
+                >
+                  Cancel
+                </button>
+              </div>
+            </form>
+          )}
+  
+          {/* Reviews */}
+          <div className="space-y-6">
+            {filteredReviews.map((review) => (
+              <div key={review._id} className="bg-white rounded-2xl shadow-lg p-8 border border-slate-200 hover:shadow-xl">
+                <div className="flex items-start justify-between mb-6">
+                  <div className="flex items-start space-x-4">
+                    <div className="w-12 h-12 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full flex items-center justify-center text-white font-bold">
+                      {review.avatar}
+                    </div>
+                    <div>
+                      <div className="flex items-center space-x-2">
+                        <h4 className="font-bold text-slate-800">{review.name}</h4>
+                        {review.verified && <Verified className="w-4 h-4 text-blue-500" />}
+                      </div>
+                      <p className="text-slate-600">{review.role}</p>
+                      <p className="text-sm text-slate-500">{review.company}</p>
+                      {review.project && (
+                        <p className="text-sm text-blue-600 font-medium">Project: {review.project}</p>
+                      )}
+                    </div>
+                  </div>
+                  <div className="text-right">
+                    <StarRating rating={review.rating} />
+                    <div className="flex items-center space-x-2 text-sm text-slate-500 mt-2">
+                      <Calendar className="w-3 h-3" />
+                      <span>{new Date(review.date).toLocaleDateString()}</span>
+                    </div>
+                  </div>
+                </div>
+                <p className="text-slate-700 mb-6">{review.review}</p>
+                <div className="flex items-center justify-between pt-4 border-t border-slate-200">
+                  <button
+                    onClick={() => handleHelpfulClick(review._id, review.helpful)}
+                    className="flex items-center space-x-2 text-slate-500 hover:text-blue-600 transition-colors"
+                  >
+                    <ThumbsUp className="w-4 h-4" />
+                    <span>Helpful ({review.helpful})</span>
+                  </button>
+                  <div className="text-sm text-slate-400">
+                    {review.verified ? 'Verified Client' : 'Unverified'}
+                  </div>
+                </div>
+              </div>
             ))}
           </div>
-        </div>
-
-        {/* Availability */}
-        <div className={`transition-all duration-1000 delay-450 ${isVisible ? 'opacity-100' : 'opacity-0'}`}>
-          <h3 className="text-xl font-semibold mb-6 text-gray-800 dark:text-gray-200 flex items-center">
-            <Clock className="w-5 h-5 mr-2" />
-            Operational Hours
-          </h3>
-          <div className="bg-gray-50 dark:bg-gray-900/50 rounded-xl p-6 border border-gray-200 dark:border-gray-800">
-            <div className="flex items-center mb-6">
-              <CalendarDays className="w-6 h-6 mr-3 text-blue-600 dark:text-blue-400" />
-              <div>
-                <h4 className="font-medium text-gray-800 dark:text-gray-200">Pakistan Standard Time (UTC+5)</h4>
-                <p className="text-sm text-gray-600 dark:text-gray-400">Current time: {new Date().toLocaleTimeString('en-PK')}</p>
-              </div>
+  
+          {filteredReviews.length === 0 && (
+            <div className="text-center py-12">
+              <div className="text-slate-400 text-lg">No reviews found matching your criteria.</div>
             </div>
-            <div className="space-y-3">
-              {availability.map((slot, index) => (
-                <div key={index} className="flex justify-between py-2 border-b border-gray-200 dark:border-gray-800 last:border-0">
-                  <span className="text-gray-700 dark:text-gray-300">{slot.day}</span>
-                  <span className="font-medium text-gray-900 dark:text-white">{slot.hours}</span>
-                </div>
-              ))}
-            </div>
-          </div>
+          )}
         </div>
       </div>
-    </section>
   );
 };
 
-export default Contact;
+export default ReviewPage;
