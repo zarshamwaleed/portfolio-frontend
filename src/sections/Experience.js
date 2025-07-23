@@ -32,7 +32,7 @@ const experiences = [
   },
   {
     id: 2,
-    title: "Full Stack Developer",
+    title: "MERN Stack Developer",
     company: "DevelopersHub Corporation©",
     type: "Internship",
     duration: "Jul 2025 - Present · 1 mo",
