@@ -10,6 +10,8 @@ const ReviewPage = () => {
   const [filterRating, setFilterRating] = useState('all');
   const [sortBy, setSortBy] = useState('newest');
   const [searchTerm, setSearchTerm] = useState('');
+const [loading, setLoading] = useState(false);
+const [showThankYou, setShowThankYou] = useState(false);
 
   const [newReview, setNewReview] = useState({
     name: '',
@@ -52,27 +54,33 @@ const ReviewPage = () => {
     setNewReview((prev) => ({ ...prev, rating }));
   };
 
-  const handleSubmitReview = async (e) => {
-    e.preventDefault();
-    if (newReview.rating === 0) return;
+const handleSubmitReview = async (e) => {
+  e.preventDefault();
+  if (newReview.rating === 0) return;
+  setLoading(true);
 
-    const reviewToPost = {
-      ...newReview,
-      date: new Date().toISOString().split('T')[0],
-      avatar: newReview.name.split(' ').map((n) => n[0]).join('').toUpperCase(),
-      helpful: 0,
-      verified: false,
-    };
-
-    try {
-      const res = await axios.post(API_BASE, reviewToPost);
-      setReviews((prev) => [res.data, ...prev]);
-      setNewReview({ name: '', role: '', company: '', rating: 0, review: '', project: '' });
-      setShowReviewForm(false);
-    } catch (err) {
-      console.error('Error submitting review:', err.message);
-    }
+  const reviewToPost = {
+    ...newReview,
+    date: new Date().toISOString().split('T')[0],
+    avatar: newReview.name.split(' ').map((n) => n[0]).join('').toUpperCase(),
+    helpful: 0,
+    verified: false,
   };
+
+  try {
+    const res = await axios.post(API_BASE, reviewToPost);
+    setReviews((prev) => [res.data, ...prev]);
+    setNewReview({ name: '', role: '', company: '', rating: 0, review: '', project: '' });
+    setShowReviewForm(false);
+    setShowThankYou(true);
+    setTimeout(() => setShowThankYou(false), 4000); // Auto-hide after 4 seconds
+  } catch (err) {
+    console.error('Error submitting review:', err.message);
+  } finally {
+    setLoading(false);
+  }
+};
+
 
   const handleHelpfulClick = async (id, helpfulCount) => {
     try {
@@ -284,12 +292,42 @@ const ReviewPage = () => {
     </div>
 
     <div className="flex gap-4">
-      <button
-        type="submit"
-        className="bg-blue-600 text-white px-6 py-3 rounded-lg hover:shadow-lg hover:bg-blue-700 transition-all"
+   <button
+  type="submit"
+  disabled={loading}
+  className={`flex items-center justify-center gap-2 px-6 py-3 rounded-lg font-medium transition-all
+    ${loading ? 'bg-blue-400 cursor-not-allowed' : 'bg-blue-600 hover:bg-blue-700 text-white hover:shadow-lg'}
+  `}
+>
+  {loading ? (
+    <>
+      <svg
+        className="animate-spin h-5 w-5 text-white"
+        xmlns="http://www.w3.org/2000/svg"
+        fill="none"
+        viewBox="0 0 24 24"
       >
-        Submit Review
-      </button>
+        <circle
+          className="opacity-25"
+          cx="12"
+          cy="12"
+          r="10"
+          stroke="currentColor"
+          strokeWidth="4"
+        />
+        <path
+          className="opacity-75"
+          fill="currentColor"
+          d="M4 12a8 8 0 018-8v8z"
+        />
+      </svg>
+      <span>Submitting...</span>
+    </>
+  ) : (
+    'Submit Review'
+  )}
+</button>
+
       <button
         type="button"
         onClick={() => setShowReviewForm(false)}
@@ -299,6 +337,12 @@ const ReviewPage = () => {
       </button>
     </div>
   </form>
+  
+)}
+{showThankYou && (
+  <div className="mt-4 text-green-600 font-medium text-center bg-green-100 border border-green-300 rounded-lg px-4 py-3 animate-fadeIn">
+    ✅ Thank you! Your review has been submitted successfully.
+  </div>
 )}
 
 
