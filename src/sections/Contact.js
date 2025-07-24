@@ -99,7 +99,7 @@ const Contact = () => {
       icon: Globe, 
       platform: 'Personal Website', 
       handle: 'zarsham.dev', 
-      href: 'https://www.olx.com.pk/profile/9664a977-05ac-490e-8771-db97b2ec07b4',
+      href: 'https://portfolio-frontend-alpha-livid.vercel.app/',
       color: 'text-purple-600 dark:text-purple-400 hover:bg-purple-600 hover:text-white'
     }
   ];
