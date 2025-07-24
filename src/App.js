@@ -19,24 +19,28 @@ export default function App() {
   return (
     <Router>
       <Navbar />
-      <div className="pt-14"> {/* Add top padding so content is not hidden behind navbar */}
+      
+      {/* Ensure no extra margin below pages */}
+      <main className="pt-10 pb-0 m-0">
         <Routes>
-         <Route path="/" element={<Home />} />
+          <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
-        <Route path="/skills" element={<Skills />} />
+          <Route path="/skills" element={<Skills />} />
           <Route path="/projects" element={<Project />} /> 
           <Route path="/contact" element={<Contact />} /> 
-            <Route path="/experience" element={<Experience />} /> 
-            <Route path="/hero" element={<Hero />} /> 
-             <Route path="/certificates" element={<CertificationPage />} /> 
-             <Route path="/reviews" element={<ReviewPage />} /> 
-               <Route path="/blog" element={< BlogPage/>} /> 
-               <Route path="/privacy&terms" element={< PrivacyPolicy/>} /> 
-               <Route path="/services" element={< ServicesPage/>} /> 
-           
+          <Route path="/experience" element={<Experience />} /> 
+          <Route path="/hero" element={<Hero />} /> 
+          <Route path="/certificates" element={<CertificationPage />} /> 
+          <Route path="/reviews" element={<ReviewPage />} /> 
+          <Route path="/blog" element={< BlogPage/>} /> 
+          <Route path="/privacy&terms" element={< PrivacyPolicy/>} /> 
+          <Route path="/services" element={< ServicesPage/>} /> 
         </Routes>
-      </div>
-      <Footer/>
+      </main>
+
+      {/* Footer attaches directly after content */}
+      <Footer />
     </Router>
   );
 }
+

@@ -199,11 +199,13 @@ const API_BASE = 'https://portfolio-backend-omega-fawn.vercel.app/api/reviews';
 
   return (
 <div
-  className="transition-all duration-1000 p-8 rounded-xl shadow-lg"
+  className="transition-all duration-1000 p-8 shadow-lg"
   style={{
-    background: "linear-gradient(to bottom right, rgb(30, 30, 30), rgb(45, 45, 45), rgb(10, 10, 10))"
+    background:
+      "linear-gradient(to bottom right, rgb(30, 30, 30), rgb(45, 45, 45), rgb(10, 10, 10))"
   }}
 >
+
 
   {/* Your Content Will Go Here */}
   <div className="relative z-10">
