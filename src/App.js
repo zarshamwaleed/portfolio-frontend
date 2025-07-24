@@ -19,7 +19,7 @@ export default function App() {
   return (
     <Router>
       <Navbar />
-      <div className="pt-16"> {/* Add top padding so content is not hidden behind navbar */}
+      <div className="pt-14"> {/* Add top padding so content is not hidden behind navbar */}
         <Routes>
          <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
