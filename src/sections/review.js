@@ -390,13 +390,13 @@ const handleSubmitReview = async (e) => {
       <p className="text-gray-200 mb-6">{review.review}</p>
 
       <div className="flex items-center justify-between pt-4 border-t border-slate-700">
-        <button
+        {/* <button
           onClick={() => handleHelpfulClick(review._id, review.helpful)}
           className="flex items-center space-x-2 text-gray-400 hover:text-blue-400 transition-colors"
         >
           <ThumbsUp className="w-4 h-4" />
           <span>Helpful ({review.helpful})</span>
-        </button>
+        </button> */}
         <div className="text-sm text-slate-400">
           {review.verified ? 'Verified Client' : 'Unverified'}
         </div>

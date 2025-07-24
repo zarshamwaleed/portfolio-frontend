@@ -3,6 +3,8 @@ import { motion } from "framer-motion";
 import { BookOpen, CheckCircle, Zap } from "lucide-react";
 import { Link } from 'react-router-dom';
 
+import axios from "axios";
+
 
 import {
   FiDownload,
@@ -45,7 +47,7 @@ const ProfessionalHero = () => {
     "UI/UX Designer",
     "Team Leader",
   ];
-
+const API_BASE = 'https://portfolio-backend-omega-fawn.vercel.app/api/reviews';
   const rotatingStats = [
     {
       number: "10+",
@@ -116,6 +118,26 @@ const ProfessionalHero = () => {
       gradient: "from-pink-500 to-rose-600",
     },
   ];
+   const [averageRating, setAverageRating] = useState(0);
+
+  useEffect(() => {
+    const fetchReviews = async () => {
+      try {
+        const res = await axios.get(API_BASE);
+        const reviews = res.data;
+
+        const avg =
+          reviews.reduce((acc, review) => acc + review.rating, 0) /
+            reviews.length || 0;
+
+        setAverageRating(avg);
+      } catch (err) {
+        console.error("Failed to fetch reviews:", err.message);
+      }
+    };
+
+    fetchReviews();
+  }, []);
 
   const achievements = [
     {
@@ -123,11 +145,12 @@ const ProfessionalHero = () => {
       text: "10+ Projects",
       color: "text-yellow-400",
     },
-    {
-      icon: <Star className="w-6 h-6" />,
-      text: "4.9/5 Rating",
-      color: "text-blue-400",
-    },
+ {
+  icon: <Star className="w-6 h-6" />,
+  text: `${averageRating.toFixed(1)}/5 Rating`,
+  color: "text-blue-400",
+}
+,
     {
       icon: <BookOpen className="w-6 h-6" />,
       text: "BSc in CS",
@@ -171,6 +194,8 @@ const ProfessionalHero = () => {
   const scrollToContent = () => {
     window.scrollTo({ top: window.innerHeight, behavior: "smooth" });
   };
+
+  
 
   return (
     <div className="relative min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 overflow-hidden text-[90%] m-0 p-0 mt-0 pt-8">
