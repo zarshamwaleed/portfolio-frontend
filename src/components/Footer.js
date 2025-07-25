@@ -50,9 +50,10 @@ const Footer = () => {
           {/* Brand Section */}
           <div className="space-y-4">
             <h2 className="text-2xl font-bold text-white">
-              <span className="bg-gradient-to-r from-blue-500 to-purple-500 bg-clip-text text-transparent">
-                &lt;ZarshamWaleed /&gt;
-              </span>
+           <span className="bg-gradient-to-r from-orange-600 via-amber-600 to-yellow-600 bg-clip-text text-transparent">
+  &lt;ZarshamWaleed /&gt;
+</span>
+
             </h2>
             <p className="text-sm leading-relaxed max-w-xs text-gray-400">
               Passionate web developer crafting modern, scalable applications
@@ -91,7 +92,7 @@ const Footer = () => {
                 <li key={link.name}>
                   <a
                     href={link.href}
-                    className="text-sm hover:text-white transition-colors duration-200"
+                    className="text-sm hover:text-orange-500 transition-colors duration-200"
                   >
                     {link.name}
                   </a>
@@ -114,7 +115,7 @@ const Footer = () => {
                         href={link.href}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="text-sm hover:text-white transition-colors duration-200"
+                        className="text-sm hover:text-orange-500 transition-colors duration-200"
                       >
                         {link.name}
                       </a>
@@ -136,13 +137,13 @@ const Footer = () => {
           <div className="flex space-x-6 mt-4 md:mt-0">
             <a
               href="/privacy&terms"
-              className="hover:text-blue-500 transition-colors"
+              className="hover:text-orange-500 transition-colors"
             >
               Privacy Policy
             </a>
             <a
               href="/privacy&terms"
-              className="hover:text-blue-500 transition-colors"
+              className="hover:text-orange-500 transition-colors"
             >
               Terms of Service
             </a>

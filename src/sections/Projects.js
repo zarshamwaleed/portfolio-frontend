@@ -351,119 +351,133 @@ const categories = [
       </div>
     );
   };
+return (
+ <div 
+  className="relative min-h-screen py-16 text-white" 
+  style={{
+    background: "linear-gradient(to bottom right, rgb(30,30,30), rgb(45,45,45), rgb(10,10,10))"
+  }}
+>
+  {/* Decorative Background Blobs */}
+  <div className="absolute inset-0 overflow-hidden pointer-events-none">
+    <div className="absolute top-20 right-10 w-72 h-72 bg-gradient-to-r from-blue-400/10 to-purple-600/10 rounded-full blur-3xl"></div>
+    <div className="absolute bottom-20 left-10 w-72 h-72 bg-gradient-to-r from-green-400/10 to-cyan-600/10 rounded-full blur-3xl"></div>
+  </div>
 
-  return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-900 via-blue-900 to-purple-900">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-        {/* Header */}
-        <div className="text-center mb-16">
-        <h1 className="text-4xl md:text-6xl font-bold text-white font-mono mb-4">
-  <span className="bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">
-    projectList[]
-  </span>
-</h1>
+  <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    {/* Header */}
+    <div className="text-center mb-16">
+      <h1 className="text-4xl md:text-6xl font-bold text-white font-mono mb-4">
+        <span className="bg-gradient-to-r from-orange-600 via-amber-600 to-yellow-600 bg-clip-text text-transparent">
+          projectList[]
+        </span>
+      </h1>
 
-          <p className="text-xl text-gray-300 max-w-3xl mx-auto">
-            A collection of innovative solutions spanning full-stack web development, AI-powered systems, and enterprise applications.
+      <p className="text-xl text-gray-300 max-w-3xl mx-auto">
+        A collection of innovative solutions spanning full-stack web development, AI-powered systems, and enterprise applications.
+      </p>
+    </div>
+
+    {/* Filters */}
+    <div className="flex flex-wrap justify-center gap-3 mb-12">
+      {categories.map((category) => (
+        <button
+          key={category.id}
+          onClick={() => setActiveFilter(category.id)}
+          className={`px-6 py-3 rounded-full font-semibold text-sm ${
+            activeFilter === category.id
+              ? 'bg-gradient-to-r from-orange-500 via-orange-700 to-black-300  shadow-lg shadow-blue-500/30'
+              : 'bg-white/10 text-gray-300 hover:bg-white/20 backdrop-blur-md'
+          }`}
+        >
+          {category.name} ({category.count})
+        </button>
+      ))}
+    </div>
+
+    {/* Projects Grid */}
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      {filteredProjects.map((project) => (
+        <ProjectCard key={project.id} project={project} />
+      ))}
+    </div>
+  </div>
+
+  {/* Gallery Modal */}
+  {selectedProject && (
+    <div className="fixed inset-0 z-50 bg-black/90 backdrop-blur-lg flex items-center justify-center p-4">
+      <button 
+        onClick={closeGallery}
+        className="absolute top-6 right-6 text-white hover:text-gray-300 transition-colors"
+      >
+        <X size={32} />
+      </button>
+
+      <div className="max-w-6xl w-full bg-gray-900/80 rounded-xl overflow-hidden border border-white/20">
+        {/* Main Image */}
+        <div className="relative h-96 w-full overflow-hidden">
+          <img 
+            src={projectImages[selectedProject][currentImageIndex]} 
+            alt={`Project ${selectedProject} screenshot ${currentImageIndex + 1}`}
+            className="w-full h-full object-contain"
+          />
+
+          {/* Navigation Arrows */}
+          <button 
+            onClick={prevImage}
+            className="absolute left-4 top-1/2 -translate-y-1/2 bg-black/50 text-white p-2 rounded-full hover:bg-black/70 transition-colors"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M15 18l-6-6 6-6"/>
+            </svg>
+          </button>
+          <button 
+            onClick={nextImage}
+            className="absolute right-4 top-1/2 -translate-y-1/2 bg-black/50 text-white p-2 rounded-full hover:bg-black/70 transition-colors"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M9 18l6-6-6-6"/>
+            </svg>
+          </button>
+        </div>
+
+        {/* Image Description */}
+        <div className="p-6 border-t border-white/10">
+          <p className="text-white text-lg font-medium">
+            {imageDescriptions[selectedProject]?.[currentImageIndex] || "Project screenshot"}
           </p>
         </div>
 
-        {/* Filters */}
-        <div className="flex flex-wrap justify-center gap-3 mb-12">
-          {categories.map((category) => (
+        {/* Thumbnail Navigation */}
+        <div className="flex overflow-x-auto p-4 space-x-2 bg-gray-900/50">
+          {projectImages[selectedProject].map((img, index) => (
             <button
-              key={category.id}
-              onClick={() => setActiveFilter(category.id)}
-              className={`px-6 py-3 rounded-full font-semibold text-sm ${
-                activeFilter === category.id
-                  ? 'bg-gradient-to-r from-blue-500 to-purple-500 text-white'
-                  : 'bg-white/10 text-gray-300 hover:bg-white/20'
+              key={index}
+              onClick={() => setCurrentImageIndex(index)}
+              className={`flex-shrink-0 w-16 h-16 rounded overflow-hidden border-2 transition-all ${
+                currentImageIndex === index ? 'border-blue-500' : 'border-transparent'
               }`}
             >
-              {category.name} ({category.count})
+              <img 
+                src={img} 
+                alt={`Thumbnail ${index + 1}`}
+                className="w-full h-full object-cover"
+              />
             </button>
           ))}
         </div>
 
-        {/* Projects Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {filteredProjects.map((project) => (
-            <ProjectCard key={project.id} project={project} />
-          ))}
+        {/* Image Counter */}
+        <div className="px-6 py-3 text-center text-gray-300 text-sm">
+          {currentImageIndex + 1} / {projectImages[selectedProject].length}
         </div>
       </div>
-
-      {/* Gallery Modal */}
-      {selectedProject && (
-        <div className="fixed inset-0 z-50 bg-black/90 backdrop-blur-lg flex items-center justify-center p-4">
-          <button 
-            onClick={closeGallery}
-            className="absolute top-6 right-6 text-white hover:text-gray-300 transition-colors"
-          >
-            <X size={32} />
-          </button>
-
-          <div className="max-w-6xl w-full bg-gray-900/80 rounded-xl overflow-hidden border border-white/20">
-            {/* Main Image */}
-            <div className="relative h-96 w-full overflow-hidden">
-              <img 
-                src={projectImages[selectedProject][currentImageIndex]} 
-                alt={`Project ${selectedProject} screenshot ${currentImageIndex + 1}`}
-                className="w-full h-full object-contain"
-              />
-              
-              {/* Navigation Arrows */}
-              <button 
-                onClick={prevImage}
-                className="absolute left-4 top-1/2 transform -translate-y-1/2 bg-black/50 text-white p-2 rounded-full hover:bg-black/70 transition-colors"
-              >
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M15 18l-6-6 6-6"/>
-                </svg>
-              </button>
-              <button 
-                onClick={nextImage}
-                className="absolute right-4 top-1/2 transform -translate-y-1/2 bg-black/50 text-white p-2 rounded-full hover:bg-black/70 transition-colors"
-              >
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M9 18l6-6-6-6"/>
-                </svg>
-              </button>
-            </div>
-
-            {/* Image Description */}
-            <div className="p-6 border-t border-white/10">
-              <p className="text-white text-lg font-medium">
-                {imageDescriptions[selectedProject]?.[currentImageIndex] || "Project screenshot"}
-              </p>
-            </div>
-
-            {/* Thumbnail Navigation */}
-            <div className="flex overflow-x-auto p-4 space-x-2 bg-gray-900/50">
-              {projectImages[selectedProject].map((img, index) => (
-                <button
-                  key={index}
-                  onClick={() => setCurrentImageIndex(index)}
-                  className={`flex-shrink-0 w-16 h-16 rounded overflow-hidden border-2 transition-all ${currentImageIndex === index ? 'border-blue-500' : 'border-transparent'}`}
-                >
-                  <img 
-                    src={img} 
-                    alt={`Thumbnail ${index + 1}`}
-                    className="w-full h-full object-cover"
-                  />
-                </button>
-              ))}
-            </div>
-
-            {/* Image Counter */}
-            <div className="px-6 py-3 text-center text-gray-300 text-sm">
-              {currentImageIndex + 1} / {projectImages[selectedProject].length}
-            </div>
-          </div>
-        </div>
-      )}
     </div>
-  );
+  )}
+</div>
+
+);
+
 };
 
 export default ProjectsPortfolio;

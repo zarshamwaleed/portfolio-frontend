@@ -50,7 +50,10 @@ const PrivacyTermsPage = () => {
 >
   <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
     <div className="text-center">
-      <h1 className="text-4xl font-bold text-white mb-4">Legal Information</h1>
+     <h1 className="text-4xl font-bold mb-4 bg-gradient-to-r from-orange-600 via-amber-600 to-yellow-600 bg-clip-text text-transparent">
+  Legal Information
+</h1>
+
       <p className="text-xl text-gray-300 max-w-3xl mx-auto">
         Your privacy and trust are important to us. Please review our policies carefully.
       </p>

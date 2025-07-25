@@ -4,6 +4,9 @@ module.exports = {
   content: ["./src/**/*.{js,jsx,ts,tsx}"],
   theme: {
     extend: {
+ fontFamily: {
+    berkshire: ['"Berkshire Swash"', 'cursive'],
+  },
       animation: {
         fadeIn: 'fadeIn 0.5s ease-in-out',
       },

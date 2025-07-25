@@ -239,7 +239,7 @@ const API_BASE = 'https://portfolio-backend-omega-fawn.vercel.app/api/reviews';
           Available for Work
         </span>
       </div>
-      <div className="flex items-center gap-1 text-yellow-400">
+      <div className="flex items-center gap-1 text-orange-600">
         <MapPin className="w-4 h-4" />
         <span className="text-sm font-medium">Pakistan</span>
       </div>
@@ -251,12 +251,17 @@ const API_BASE = 'https://portfolio-backend-omega-fawn.vercel.app/api/reviews';
     </h5>
 
     <div className="text-2xl lg:text-3xl text-slate-300 mb-6 min-h-[2.5rem]">
-   <span
-  className="inline-block px-4 py-2 rounded-lg bg-white/5 backdrop-blur-md border border-white/10 shadow-md text-slate-200 text-xl font-[Comic Sans MS]"
+<span
+  className="font-berkshire font-bold inline-block px-4 py-2 rounded-lg bg-gradient-to-r from-orange-500 via-orange-700 to-black backdrop-blur-md border border-white/10 shadow-lg text-slate-100 text-xl"
 >
   {roles[currentRole]}
-  <span className="ml-2 animate-pulse text-blue-400"></span>
+  <span className="ml-2 animate-pulse text-orange-300">|</span>
 </span>
+
+
+
+
+
 
     </div>
   </div>
@@ -286,19 +291,20 @@ const API_BASE = 'https://portfolio-backend-omega-fawn.vercel.app/api/reviews';
     </p>
 
     {/* Rotating Stat */}
-    <div className="inline-flex items-center gap-3 p-4 bg-white/5 backdrop-blur-lg rounded-2xl border border-white/10">
-      <div className="text-blue-400">
-        {rotatingStats[currentStat].icon}
-      </div>
-      <div>
-        <span className="text-2xl font-bold text-white">
-          {rotatingStats[currentStat].number}
-        </span>
-        <span className="text-slate-400 ml-2">
-          {rotatingStats[currentStat].label}
-        </span>
-      </div>
-    </div>
+  <div className="inline-flex items-center gap-3 p-4 bg-gradient-to-r from-orange-500 via-orange-700 to-black backdrop-blur-lg rounded-2xl border border-white/10 shadow-lg">
+  <div className="text-orange-300">
+    {rotatingStats[currentStat].icon}
+  </div>
+  <div>
+    <span className="text-2xl font-bold text-white">
+      {rotatingStats[currentStat].number}
+    </span>
+    <span className="text-slate-200 ml-2">
+      {rotatingStats[currentStat].label}
+    </span>
+  </div>
+</div>
+
   </div>
 
   {/* Achievements */}
@@ -331,13 +337,17 @@ const API_BASE = 'https://portfolio-backend-omega-fawn.vercel.app/api/reviews';
     <div className="space-y-4">
       <div className="flex items-center justify-between">
         <h3 className="text-white font-semibold text-lg">Recent Work</h3>
-        <Link
-          to="/projects"
-          className="text-blue-400 hover:text-blue-300 text-sm font-medium flex items-center gap-1 group"
-        >
-          View All
-          <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-        </Link>
+<Link
+  to="/projects"
+  className="flex items-center gap-1 group px-3 py-1 rounded-xl transition-all duration-300"
+>
+  <span className="text-orange-500 text-sm font-medium">
+    View All
+  </span>
+  <ArrowRight className="w-4 h-4 text-orange-500 group-hover:translate-x-1 transition-transform" />
+</Link>
+
+
       </div>
 
       <div className="space-y-3">
@@ -348,7 +358,7 @@ const API_BASE = 'https://portfolio-backend-omega-fawn.vercel.app/api/reviews';
           >
             <div className="flex items-center justify-between">
               <div>
-                <h4 className="text-white font-medium group-hover:text-blue-400 transition-colors">
+                <h4 className="text-white font-medium group-hover:text-orange-600 transition-colors">
                   {work.title}
                 </h4>
                 <p className="text-slate-400 text-sm">{work.tech}</p>
@@ -382,10 +392,11 @@ const API_BASE = 'https://portfolio-backend-omega-fawn.vercel.app/api/reviews';
     }`}
   >
     <Link to="/projects">
-      <button className="group bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white px-8 py-4 rounded-2xl font-semibold flex items-center justify-center gap-3 shadow-2xl hover:shadow-blue-500/25 transition-all duration-300 hover:-translate-y-1">
-        <span>View My Work</span>
-        <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform duration-300" />
-      </button>
+    <button className="group bg-gradient-to-r from-orange-500 via-orange-700 to-black hover:from-orange-600 hover:to-gray-900 text-white px-8 py-4 rounded-2xl font-semibold flex items-center justify-center gap-3 shadow-2xl hover:shadow-orange-500/30 transition-all duration-300 hover:-translate-y-1">
+  <span>View My Work</span>
+  <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform duration-300" />
+</button>
+
     </Link>
 
     <a
@@ -554,30 +565,31 @@ const API_BASE = 'https://portfolio-backend-omega-fawn.vercel.app/api/reviews';
 
   {/* Floating Badges */}
   <motion.div
-    animate={{ y: [-10, 10, -10] }}
-    transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
-    className="absolute -bottom-4 -left-4 bg-gradient-to-r from-emerald-500 via-teal-500 to-green-500 backdrop-blur-md p-4 rounded-xl shadow-xl border border-white/10"
-  >
-    <div className="flex items-center space-x-2">
-      <div className="w-2 h-2 bg-white rounded-full animate-pulse"></div>
-      <span className="text-sm font-medium text-white">Currently building</span>
-    </div>
-    <p className="text-xs text-white/80 mt-1 ml-4">MERN Project</p>
-  </motion.div>
+  animate={{ y: [-10, 10, -10] }}
+  transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
+  className="absolute -bottom-4 -left-4 bg-gradient-to-r from-orange-500 via-orange-700 to-black backdrop-blur-md p-4 rounded-xl shadow-xl border border-white/10"
+>
+  <div className="flex items-center space-x-2">
+    <div className="w-2 h-2 bg-white rounded-full animate-pulse"></div>
+    <span className="text-sm font-medium text-white">Currently building</span>
+  </div>
+  <p className="text-xs text-white/80 mt-1 ml-4">MERN Project</p>
+</motion.div>
 
-  <motion.div
-    animate={{ y: [10, -10, 10] }}
-    transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
-    className="absolute -top-4 -right-4 bg-gradient-to-r from-purple-500 via-pink-500 to-fuchsia-500 backdrop-blur-md p-4 rounded-xl shadow-xl border border-white/10"
-  >
-    <div className="flex items-center space-x-2">
-      <FiTrendingUp className="w-4 h-4 text-white" />
-      <span className="text-sm font-medium text-white">Keep Building</span>
-    </div>
-    <p className="text-xs text-white/80 mt-1 ml-2">
-      Every line of code counts
-    </p>
-  </motion.div>
+<motion.div
+  animate={{ y: [10, -10, 10] }}
+  transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
+  className="absolute -top-4 -right-4 bg-gradient-to-r from-orange-500 via-orange-700 to-black backdrop-blur-md p-4 rounded-xl shadow-xl border border-white/10"
+>
+  <div className="flex items-center space-x-2">
+    <FiTrendingUp className="w-4 h-4 text-white" />
+    <span className="text-sm font-medium text-white">Keep Building</span>
+  </div>
+  <p className="text-xs text-white/80 mt-1 ml-2">
+    Every line of code counts
+  </p>
+</motion.div>
+
 </div>
 
   </div>

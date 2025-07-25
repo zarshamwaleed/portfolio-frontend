@@ -137,7 +137,10 @@ const handleSubmitReview = async (e) => {
                 <Quote className="w-12 h-12 text-white" />
               </div>
             </div>
-            <h1 className="text-4xl md:text-5xl font-bold text-white mb-4">getFeedback()</h1>
+          <h1 className="text-4xl md:text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-orange-600 via-amber-600 to-yellow-600 mb-4">
+  getFeedback()
+</h1>
+
             <p className="text-xl text-slate-300 max-w-3xl mx-auto">
               Discover what clients say about their experience working with us
             </p>
@@ -200,7 +203,7 @@ const handleSubmitReview = async (e) => {
     <input
       type="text"
       placeholder="Search reviews..."
-      className="pl-10 pr-4 py-2 bg-white/10 text-white placeholder-slate-400 border border-slate-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none"
+      className="pl-10 pr-4 py-2 bg-white/10 text-white placeholder-slate-400 border border-slate-600 rounded-lg focus:ring-2 focus:ring-orange-500 focus:outline-none"
       value={searchTerm}
       onChange={(e) => setSearchTerm(e.target.value)}
     />
@@ -208,7 +211,7 @@ const handleSubmitReview = async (e) => {
 
   {/* Rating Filter */}
   <select
-    className="px-4 py-2 bg-white/10 text-white border border-slate-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none"
+    className="px-4 py-2 bg-white/10 text-white border border-slate-600 rounded-lg focus:ring-2 focus:ring-orange-500 focus:outline-none"
     value={filterRating}
     onChange={(e) => setFilterRating(e.target.value)}
   >
@@ -226,7 +229,7 @@ const handleSubmitReview = async (e) => {
 
   {/* Sort Dropdown */}
   <select
-    className="px-4 py-2 bg-white/10 text-white border border-slate-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none"
+    className="px-4 py-2 bg-white/10 text-white border border-slate-600 rounded-lg focus:ring-2 focus:ring-orange-500 focus:outline-none"
     value={sortBy}
     onChange={(e) => setSortBy(e.target.value)}
   >
@@ -241,7 +244,7 @@ const handleSubmitReview = async (e) => {
 
       <button
         onClick={() => setShowReviewForm(!showReviewForm)}
-        className="flex items-center space-x-2 bg-gradient-to-r from-blue-600 to-blue-700 text-white px-6 py-2 rounded-lg hover:shadow-lg transition-all duration-300 transform hover:scale-105"
+        className="flex items-center space-x-2 bg-gradient-to-r from-orange-500 via-orange-700 to-black text-white px-6 py-2 rounded-lg hover:shadow-lg transition-all duration-300 transform hover:scale-105"
       >
         <Plus className="w-4 h-4" />
         <span>Write a Review</span>
@@ -261,7 +264,7 @@ const handleSubmitReview = async (e) => {
           key={field}
           type="text"
           placeholder={`Your ${field.charAt(0).toUpperCase() + field.slice(1)}${field === 'name' ? ' *' : ''}`}
-          className="px-4 py-3 bg-white/10 text-white placeholder-slate-400 border border-slate-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none"
+          className="px-4 py-3 bg-white/10 text-white placeholder-slate-400 border border-slate-600 rounded-lg focus:ring-2 focus:ring-orange-500 focus:outline-none"
           value={newReview[field]}
           onChange={(e) => setNewReview((prev) => ({ ...prev, [field]: e.target.value }))}
           required={field === 'name'}
@@ -272,7 +275,7 @@ const handleSubmitReview = async (e) => {
     <input
       type="text"
       placeholder="Project Name"
-      className="w-full px-4 py-3 bg-white/10 text-white placeholder-slate-400 border border-slate-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none"
+      className="w-full px-4 py-3 bg-white/10 text-white placeholder-slate-400 border border-slate-600 rounded-lg focus:ring-2 focus:ring-orange-500 focus:outline-none"
       value={newReview.project}
       onChange={(e) => setNewReview((prev) => ({ ...prev, project: e.target.value }))}
     />
@@ -293,7 +296,7 @@ const handleSubmitReview = async (e) => {
         required
         rows={4}
         placeholder="Share your experience..."
-        className="w-full px-4 py-3 bg-white/10 text-white placeholder-slate-400 border border-slate-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none resize-none"
+        className="w-full px-4 py-3 bg-white/10 text-white placeholder-slate-400 border border-slate-600 rounded-lg focus:ring-2 focus:ring-orange-500 focus:outline-none resize-none"
         value={newReview.review}
         onChange={(e) => setNewReview((prev) => ({ ...prev, review: e.target.value }))}
       ></textarea>
@@ -304,7 +307,9 @@ const handleSubmitReview = async (e) => {
   type="submit"
   disabled={loading}
   className={`flex items-center justify-center gap-2 px-6 py-3 rounded-lg font-medium transition-all
-    ${loading ? 'bg-blue-400 cursor-not-allowed' : 'bg-blue-600 hover:bg-blue-700 text-white hover:shadow-lg'}
+  ${loading 
+  ? 'bg-orange-300 cursor-not-allowed' 
+  : 'bg-gradient-to-r from-orange-500 via-orange-700 to-black-700 text-white hover:shadow-lg'}
   `}
 >
   {loading ? (
@@ -363,7 +368,7 @@ const handleSubmitReview = async (e) => {
     >
       <div className="flex items-start justify-between mb-6">
         <div className="flex items-start space-x-4">
-          <div className="w-12 h-12 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full flex items-center justify-center text-white font-bold">
+          <div className="w-12 h-12 bg-gradient-to-r from-orange-500 via-orange-700 to-black-200 rounded-full flex items-center justify-center text-white font-bold">
             {review.avatar}
           </div>
           <div>
@@ -374,7 +379,7 @@ const handleSubmitReview = async (e) => {
             <p className="text-sm text-gray-300">{review.role}</p>
             <p className="text-sm text-gray-400">{review.company}</p>
             {review.project && (
-              <p className="text-sm text-blue-400 font-medium">Project: {review.project}</p>
+              <p className="text-sm text-orange-500 font-medium">Project: {review.project}</p>
             )}
           </div>
         </div>

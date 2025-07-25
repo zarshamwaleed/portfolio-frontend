@@ -163,233 +163,242 @@ const Skills = () => {
     }
   };
 
-  return (
-    <section className="min-h-screen bg-gray-50 dark:bg-gray-900 py-20">
-      {/* Background Elements */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-20 right-10 w-72 h-72 bg-gradient-to-r from-blue-400/10 to-purple-600/10 rounded-full filter blur-3xl"></div>
-        <div className="absolute bottom-20 left-10 w-72 h-72 bg-gradient-to-r from-green-400/10 to-cyan-600/10 rounded-full filter blur-3xl"></div>
-      </div>
+return (
+<section
+  className="min-h-screen py-20 text-white relative"
+  style={{
+    background: "linear-gradient(to bottom right, #2a2a2a, #3a3a3a, #252525)"
+  }}
+>
 
-      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Header Section */}
-        <motion.div
-          initial={{ opacity: 0, y: -20 }}
-          animate={isMounted ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6 }}
-          className="text-center mb-16"
-        >
-       <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold font-mono text-gray-900 dark:text-white mb-4">
+    {/* Background Elements */}
+    <div className="absolute inset-0 overflow-hidden pointer-events-none">
+      <div className="absolute top-20 right-10 w-72 h-72 bg-gradient-to-r from-blue-400/10 to-purple-600/10 rounded-full filter blur-3xl"></div>
+      <div className="absolute bottom-20 left-10 w-72 h-72 bg-gradient-to-r from-green-400/10 to-cyan-600/10 rounded-full filter blur-3xl"></div>
+    </div>
+
+    <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      {/* Header Section */}
+      <motion.div
+        initial={{ opacity: 0, y: -20 }}
+        animate={isMounted ? { opacity: 1, y: 0 } : {}}
+        transition={{ duration: 0.6 }}
+        className="text-center mb-16"
+      >
+  <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold font-mono text-white mb-4">
   show
-  <span className="text-blue-500">Tech</span>
-  <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">Skills</span>()
+  <span className="bg-gradient-to-r from-orange-600 via-amber-600 to-yellow-600 bg-clip-text text-transparent">
+    Tech
+  </span>
+  <span className="bg-gradient-to-r from-orange-600 via-amber-600 to-yellow-600 bg-clip-text text-transparent">
+    Skills
+  </span>()
 </h1>
 
-          <p className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto leading-relaxed">
-            A comprehensive overview of my technical expertise, developed through hands-on experience 
-            in full-stack development, system programming, and modern web technologies.
-          </p>
-        </motion.div>
 
-        {/* Professional Summary Cards */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={isMounted ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6, delay: 0.2 }}
-          className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12"
-        >
-          {/* Experience Card */}
-          <div className="bg-white/70 dark:bg-gray-800/70 backdrop-blur-xl rounded-2xl p-6 border border-gray-200/50 dark:border-gray-700/50 shadow-lg">
-            <div className="flex items-center mb-4">
-              <div className="w-12 h-12 bg-gradient-to-r from-blue-500 to-purple-600 rounded-xl flex items-center justify-center">
-                <FiAward className="w-6 h-6 text-white" />
-              </div>
-              <div className="ml-4">
-                <h3 className="font-semibold text-gray-900 dark:text-white">Current Role</h3>
-                <p className="text-sm text-gray-600 dark:text-gray-400">{experience.duration}</p>
-              </div>
+        <p className="text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed">
+          A comprehensive overview of my technical expertise, developed through hands-on experience 
+          in full-stack development, system programming, and modern web technologies.
+        </p>
+      </motion.div>
+
+      {/* Summary Cards */}
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={isMounted ? { opacity: 1, y: 0 } : {}}
+        transition={{ duration: 0.6, delay: 0.2 }}
+        className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12"
+      >
+        {/* Experience */}
+        <div className="bg-white/10 backdrop-blur-xl rounded-2xl p-6 border border-white/10 shadow-lg">
+          <div className="flex items-center mb-4">
+            <div className="w-12 h-12 bg-gradient-to-r from-blue-500 to-purple-600 rounded-xl flex items-center justify-center">
+              <FiAward className="w-6 h-6 text-white" />
             </div>
-            <h4 className="font-bold text-lg text-gray-900 dark:text-white">{experience.position}</h4>
-            <p className="text-gray-600 dark:text-gray-300 mb-3">{experience.company}</p>
-            <div className="flex flex-wrap gap-1">
-              {experience.technologies.slice(0, 3).map((tech) => (
-                <span key={tech} className="px-2 py-1 bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 text-xs rounded-full">
-                  {tech}
-                </span>
-              ))}
+            <div className="ml-4">
+              <h3 className="font-semibold text-white">Current Role</h3>
+              <p className="text-sm text-gray-300">{experience.duration}</p>
             </div>
           </div>
+          <h4 className="font-bold text-lg text-white">{experience.position}</h4>
+          <p className="text-gray-300 mb-3">{experience.company}</p>
+          <div className="flex flex-wrap gap-1">
+            {experience.technologies.slice(0, 3).map((tech) => (
+              <span key={tech} className="px-2 py-1 bg-blue-900/30 text-blue-300 text-xs rounded-full">
+                {tech}
+              </span>
+            ))}
+          </div>
+        </div>
 
-          {/* Education Card */}
-          <div className="bg-white/70 dark:bg-gray-800/70 backdrop-blur-xl rounded-2xl p-6 border border-gray-200/50 dark:border-gray-700/50 shadow-lg">
-            <div className="flex items-center mb-4">
-              <div className="w-12 h-12 bg-gradient-to-r from-green-500 to-emerald-600 rounded-xl flex items-center justify-center">
-                <FiTool className="w-6 h-6 text-white" />
+        {/* Education */}
+        <div className="bg-white/10 backdrop-blur-xl rounded-2xl p-6 border border-white/10 shadow-lg">
+          <div className="flex items-center mb-4">
+            <div className="w-12 h-12 bg-gradient-to-r from-green-500 to-emerald-600 rounded-xl flex items-center justify-center">
+              <FiTool className="w-6 h-6 text-white" />
+            </div>
+            <div className="ml-4">
+              <h3 className="font-semibold text-white">Education</h3>
+              <p className="text-sm text-gray-300">{education.status}</p>
+            </div>
+          </div>
+          <h4 className="font-bold text-lg text-white">{education.degree}</h4>
+          <p className="text-gray-300">{education.institution}</p>
+        </div>
+
+        {/* Projects */}
+        <div className="bg-white/10 backdrop-blur-xl rounded-2xl p-6 border border-white/10 shadow-lg">
+          <div className="flex items-center mb-4">
+            <div className="w-12 h-12 bg-gradient-to-r from-purple-500 to-pink-600 rounded-xl flex items-center justify-center">
+              <FiTrendingUp className="w-6 h-6 text-white" />
+            </div>
+            <div className="ml-4">
+              <h3 className="font-semibold text-white">Portfolio</h3>
+              <p className="text-sm text-gray-300">Major Projects</p>
+            </div>
+          </div>
+          <h4 className="font-bold text-lg text-white">10+ Projects</h4>
+          <p className="text-gray-300">Full-Stack & System Programming</p>
+        </div>
+      </motion.div>
+
+      {/* Filter Buttons */}
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={isMounted ? { opacity: 1, y: 0 } : {}}
+        transition={{ duration: 0.6, delay: 0.3 }}
+        className="flex flex-wrap justify-center gap-3 mb-12"
+      >
+        {categories.map((category) => (
+       <button
+  key={category.id}
+  onClick={() => setActiveCategory(category.id)}
+  className={`flex items-center px-6 py-3 rounded-full font-medium transition-all duration-300 ${
+    activeCategory === category.id
+      ? 'bg-gradient-to-r from-orange-500 via-orange-700 to-black-300 text-white shadow-lg scale-105'
+      : 'bg-white/10 text-gray-300 hover:bg-white/20 border border-white/20'
+  }`}
+>
+
+            <span className="mr-2">{category.icon}</span>
+            {category.name}
+          </button>
+        ))}
+      </motion.div>
+
+      {/* Skills */}
+      <motion.div
+        variants={containerVariants}
+        initial="hidden"
+        animate={isMounted ? "visible" : "hidden"}
+        className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-16"
+      >
+        {getFilteredSkills().map(([categoryKey, categoryData]) => (
+          <motion.div
+            key={categoryKey}
+            variants={itemVariants}
+            className="bg-white/10 backdrop-blur-xl rounded-3xl p-8 border border-white/10 shadow-xl hover:shadow-2xl transition-all duration-300"
+          >
+            {/* Category Header */}
+            <div className="flex items-center mb-8">
+              <div className={`w-14 h-14 bg-gradient-to-r ${categoryData.color} rounded-2xl flex items-center justify-center text-white text-xl`}>
+                {categoryData.icon}
               </div>
               <div className="ml-4">
-                <h3 className="font-semibold text-gray-900 dark:text-white">Education</h3>
-                <p className="text-sm text-gray-600 dark:text-gray-400">{education.status}</p>
+                <h3 className="text-2xl font-bold text-white">
+                  {categoryData.title}
+                </h3>
+                <p className="text-gray-300">
+                  {categoryData.skills.length} technologies
+                </p>
               </div>
             </div>
-            <h4 className="font-bold text-lg text-gray-900 dark:text-white">{education.degree}</h4>
-            <p className="text-gray-600 dark:text-gray-300">{education.institution}</p>
-          </div>
 
-          {/* Projects Card */}
-          <div className="bg-white/70 dark:bg-gray-800/70 backdrop-blur-xl rounded-2xl p-6 border border-gray-200/50 dark:border-gray-700/50 shadow-lg">
-            <div className="flex items-center mb-4">
-              <div className="w-12 h-12 bg-gradient-to-r from-purple-500 to-pink-600 rounded-xl flex items-center justify-center">
-                <FiTrendingUp className="w-6 h-6 text-white" />
-              </div>
-              <div className="ml-4">
-                <h3 className="font-semibold text-gray-900 dark:text-white">Portfolio</h3>
-                <p className="text-sm text-gray-600 dark:text-gray-400">Major Projects</p>
-              </div>
-            </div>
-            <h4 className="font-bold text-lg text-gray-900 dark:text-white">10+ Projects</h4>
-            <p className="text-gray-600 dark:text-gray-300">Full-Stack & System Programming</p>
-          </div>
-        </motion.div>
-
-        {/* Category Filter */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={isMounted ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6, delay: 0.3 }}
-          className="flex flex-wrap justify-center gap-3 mb-12"
-        >
-          {categories.map((category) => (
-            <button
-              key={category.id}
-              onClick={() => setActiveCategory(category.id)}
-              className={`flex items-center px-6 py-3 rounded-full font-medium transition-all duration-300 ${
-                activeCategory === category.id
-                  ? 'bg-gradient-to-r from-blue-600 to-purple-600 text-white shadow-lg scale-105'
-                  : 'bg-white/70 dark:bg-gray-800/70 text-gray-700 dark:text-gray-300 hover:bg-white dark:hover:bg-gray-800 border border-gray-200 dark:border-gray-700'
-              }`}
-            >
-              <span className="mr-2">{category.icon}</span>
-              {category.name}
-            </button>
-          ))}
-        </motion.div>
-
-        {/* Skills Grid */}
-        <motion.div
-          variants={containerVariants}
-          initial="hidden"
-          animate={isMounted ? "visible" : "hidden"}
-          className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-16"
-        >
-          {getFilteredSkills().map(([categoryKey, categoryData]) => (
-            <motion.div
-              key={categoryKey}
-              variants={itemVariants}
-              className="bg-white/70 dark:bg-gray-800/70 backdrop-blur-xl rounded-3xl p-8 border border-gray-200/50 dark:border-gray-700/50 shadow-xl hover:shadow-2xl transition-all duration-300"
-            >
-              {/* Category Header */}
-              <div className="flex items-center mb-8">
-                <div className={`w-14 h-14 bg-gradient-to-r ${categoryData.color} rounded-2xl flex items-center justify-center text-white text-xl`}>
-                  {categoryData.icon}
-                </div>
-                <div className="ml-4">
-                  <h3 className="text-2xl font-bold text-gray-900 dark:text-white">
-                    {categoryData.title}
-                  </h3>
-                  <p className="text-gray-600 dark:text-gray-400">
-                    {categoryData.skills.length} technologies
-                  </p>
-                </div>
-              </div>
-
-              {/* Skills List */}
-              <div className="space-y-6">
-                {categoryData.skills.map((skill, index) => (
-                  <motion.div
-                    key={skill.name}
-                    initial={{ opacity: 0, x: -20 }}
-                    animate={isMounted ? { opacity: 1, x: 0 } : {}}
-                    transition={{ duration: 0.5, delay: index * 0.1 }}
-                    className="group"
-                  >
-                    <div className="flex justify-between items-center mb-2">
-                      <div>
-                        <span className="font-semibold text-gray-900 dark:text-white">
-                          {skill.name}
-                        </span>
-                        <span className="ml-2 text-sm text-gray-500 dark:text-gray-400">
-                          {skill.experience}
-                        </span>
-                      </div>
-                      <span className="text-sm font-medium text-gray-600 dark:text-gray-300">
-                        {skill.level}%
+            {/* Skills */}
+            <div className="space-y-6">
+              {categoryData.skills.map((skill, index) => (
+                <motion.div
+                  key={skill.name}
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={isMounted ? { opacity: 1, x: 0 } : {}}
+                  transition={{ duration: 0.5, delay: index * 0.1 }}
+                  className="group"
+                >
+                  <div className="flex justify-between items-center mb-2">
+                    <div>
+                      <span className="font-semibold text-white">
+                        {skill.name}
+                      </span>
+                      <span className="ml-2 text-sm text-gray-400">
+                        {skill.experience}
                       </span>
                     </div>
-                    <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-3 overflow-hidden">
-                      <motion.div
-                        initial={{ width: 0 }}
-                        animate={isMounted ? { width: `${skill.level}%` } : {}}
-                        transition={{ duration: 1.5, delay: 0.5 + index * 0.1 }}
-                        className={`h-full bg-gradient-to-r ${categoryData.color} rounded-full relative`}
-                      >
-                        <div className="absolute inset-0 bg-white/20 rounded-full animate-pulse"></div>
-                      </motion.div>
-                    </div>
-                  </motion.div>
+                    <span className="text-sm font-medium text-gray-300">
+                      {skill.level}%
+                    </span>
+                  </div>
+                  <div className="w-full bg-gray-700 rounded-full h-3 overflow-hidden">
+                    <motion.div
+                      initial={{ width: 0 }}
+                      animate={isMounted ? { width: `${skill.level}%` } : {}}
+                      transition={{ duration: 1.5, delay: 0.5 + index * 0.1 }}
+                      className={`h-full bg-gradient-to-r ${categoryData.color} rounded-full relative`}
+                    >
+                      <div className="absolute inset-0 bg-white/20 rounded-full animate-pulse"></div>
+                    </motion.div>
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+          </motion.div>
+        ))}
+      </motion.div>
+
+      {/* Projects */}
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={isMounted ? { opacity: 1, y: 0 } : {}}
+        transition={{ duration: 0.6, delay: 0.5 }}
+        className="bg-white/10 backdrop-blur-xl rounded-3xl p-8 border border-white/10 shadow-xl"
+      >
+        <div className="text-center mb-8">
+         <h2 className="text-3xl font-bold mb-4 bg-gradient-to-r from-orange-500 via-orange-700 to-blackbg-clip-text text-white">
+  Featured Projects
+</h2>
+
+          <p className="text-gray-300">
+            Some of Real-world applications built with these technologies
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {projects.map((project, index) => (
+            <motion.div
+              key={project.name}
+              initial={{ opacity: 0, y: 20 }}
+              animate={isMounted ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.5, delay: 0.6 + index * 0.1 }}
+              className="bg-white/5 rounded-2xl p-6 hover:bg-white/10 transition-all duration-300 border border-white/10"
+            >
+              <h4 className="font-bold text-lg text-white mb-2">{project.name}</h4>
+              <p className="text-sm text-gray-300 mb-4">{project.category}</p>
+              <div className="flex flex-wrap gap-2">
+                {project.technologies.map((tech) => (
+                  <span
+                    key={tech}
+                    className="px-3 py-1 bg-gradient-to-r from-orange-600 via-amber-600 to-yellow-600  text-blue-300 text-xs rounded-full font-medium"
+                  >
+                    {tech}
+                  </span>
                 ))}
               </div>
             </motion.div>
           ))}
-        </motion.div>
-
-        {/* Featured Projects Section */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={isMounted ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6, delay: 0.5 }}
-          className="bg-white/70 dark:bg-gray-800/70 backdrop-blur-xl rounded-3xl p-8 border border-gray-200/50 dark:border-gray-700/50 shadow-xl"
-        >
-          <div className="text-center mb-8">
-            <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-4">
-              Featured Projects
-            </h2>
-            <p className="text-gray-600 dark:text-gray-300">
-             Some of Real-world applications built with these technologies
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {projects.map((project, index) => (
-              <motion.div
-                key={project.name}
-                initial={{ opacity: 0, y: 20 }}
-                animate={isMounted ? { opacity: 1, y: 0 } : {}}
-                transition={{ duration: 0.5, delay: 0.6 + index * 0.1 }}
-                className="bg-gray-50 dark:bg-gray-900/50 rounded-2xl p-6 hover:bg-white dark:hover:bg-gray-800 transition-all duration-300 border border-gray-200/50 dark:border-gray-700/50"
-              >
-                <h4 className="font-bold text-lg text-gray-900 dark:text-white mb-2">
-                  {project.name}
-                </h4>
-                <p className="text-sm text-gray-600 dark:text-gray-400 mb-4">
-                  {project.category}
-                </p>
-                <div className="flex flex-wrap gap-2">
-                  {project.technologies.map((tech) => (
-                    <span
-                      key={tech}
-                      className="px-3 py-1 bg-gradient-to-r from-blue-100 to-purple-100 dark:from-blue-900/30 dark:to-purple-900/30 text-blue-700 dark:text-blue-300 text-xs rounded-full font-medium"
-                    >
-                      {tech}
-                    </span>
-                  ))}
-                </div>
-              </motion.div>
-            ))}
-          </div>
-        </motion.div>
-      </div>
-    </section>
-  );
+        </div>
+      </motion.div>
+    </div>
+  </section>
+);
 };
 
 export default Skills;
