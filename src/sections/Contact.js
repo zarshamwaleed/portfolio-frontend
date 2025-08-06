@@ -131,7 +131,7 @@ const Contact = () => {
       <p className="text-lg text-gray-300 mt-4">
         Let’s connect and build something remarkable together.
       </p>
-      <div className="w-24 h-1 mt-6 bg-gradient-to-r from-blue-400 to-purple-400 mx-auto rounded-full" />
+      <div className="w-24 h-1 mt-6 bg-gradient-to-r from-orange-600 via-amber-600 to-yellow-600 mx-auto rounded-full" />
     </div>
 
     {/* Contact Cards */}

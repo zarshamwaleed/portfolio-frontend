@@ -38,48 +38,44 @@ const Navbar = () => {
         scrolled ? "bg-black/95 shadow-md" : "bg-black"
       }`}
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-7xl mx-auto px-6 sm:px-6 lg:px-2">
         {/* Desktop / Tablet Layout */}
         <div className="hidden md:flex items-center justify-between h-16">
           {/* Logo and Text Logo (Left Side) */}
-          <div className="flex items-center justify-start space-x-2 ml-[-50px]">
+          <div className="flex items-center justify-start space-x-2">
             {/* Mono Logo */}
             <a href="/" className="flex items-center">
               <img
                 src={logo}
                 alt="ZarshamTech Logo"
-                className="w-auto h-[60px] object-contain"
+                className="w-auto h-[50px] sm:h-[60px] object-contain"
               />
               <img
                 src={logo2}
                 alt="ZarshamTech Name"
-                className="h-[220px] w-auto object-contain"
-                style={{ transform: "translateX(-30px)" }} // Using transform to move logo2 to the left
+                className="h-[120px] sm:h-[220px] w-auto object-contain"
+                style={{ transform: "translateX(-20px)" }} // Adjust position for different screen sizes
               />
             </a>
           </div>
 
-          {/* Navigation Links (Centered) */}
-          <div className="flex-1 flex justify-center ml-[-40px]">
-            <div className="flex space-x-6">
-              {navLinks.map((link) => (
-                <a
-                  key={link.name}
-                  href={link.href}
-                  className="text-gray-300 hover:text-orange-500 px-2 py-2 text-sm font-medium transition-colors duration-300"
-
-                >
-                  {link.name}
-                </a>
-              ))}
-            </div>
-          </div>
+    {/* Navigation Links (Centered but slightly left) */}
+<div className="flex-1 flex justify-center ml-[-60px]">
+  <div className="flex space-x-6">
+    {navLinks.map((link) => (
+      <a
+        key={link.name}
+        href={link.href}
+        className="text-gray-300 hover:text-orange-500 px-2 py-2 text-sm font-medium transition-colors duration-300"
+      >
+        {link.name}
+      </a>
+    ))}
+  </div>
+</div>
 
           {/* Social Icons (Right Side) */}
-          <div
-            className="flex items-center space-x-4"
-            style={{ transform: "translateX(40px)" }}
-          >
+          <div className="flex items-center space-x-4">
             <a
               href="https://www.linkedin.com/in/zarsham-waleed-8376bb35b/"
               target="_blank"
@@ -102,19 +98,19 @@ const Navbar = () => {
         {/* Mobile Layout */}
         <div className="md:hidden flex items-center justify-between h-16">
           {/* Logo and Text Logo (Left Side) */}
-          <div className="flex items-center justify-start space-x-2 ml-[-50px]">
+          <div className="flex items-center justify-start space-x-2">
             {/* Mono Logo */}
             <a href="/" className="flex items-center">
               <img
                 src={logo}
                 alt="ZarshamTech Logo"
-                className="w-auto h-[60px] object-contain"
+                className="w-auto h-[40px] sm:h-[50px] object-contain"
               />
               <img
                 src={logo2}
                 alt="ZarshamTech Name"
-                className="h-[220px] w-auto object-contain"
-                style={{ transform: "translateX(-30px)" }} // Using transform to move logo2 to the left
+                className="h-[100px] sm:h-[160px] w-auto object-contain"
+                style={{ transform: "translateX(-20px)" }}
               />
             </a>
           </div>

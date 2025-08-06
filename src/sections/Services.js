@@ -79,7 +79,7 @@ export default function ServicesPage() {
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
             <Link to="/experience">
-              <button className="group bg-gradient-to-r from-indigo-500 to-blue-600 text-white px-8 py-4 rounded-full font-semibold hover:from-indigo-400 hover:to-blue-500 transition-all duration-300 transform hover:scale-105 flex items-center space-x-2">
+              <button className="group bg-gradient-to-r from-orange-500 via-orange-700 to-black text-white px-8 py-4 rounded-full font-semibold hover:from-indigo-400 hover:to-blue-500 transition-all duration-300 transform hover:scale-105 flex items-center space-x-2">
                 <span>See My Experience</span>
                 <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
               </button>
@@ -99,7 +99,7 @@ export default function ServicesPage() {
         <div className="max-w-7xl mx-auto relative">
           <div className="text-center mb-16">
             <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
-              <span className="bg-gradient-to-r from-cyan-400 to-purple-600 bg-clip-text text-transparent">Services</span>
+              <span className="bg-gradient-to-r from-orange-600 via-amber-600 to-yellow-600 bg-clip-text text-transparent">Services</span>
             </h2>
             <p className="text-xl text-gray-300 max-w-3xl mx-auto">
               Comprehensive development solutions tailored to your business needs
@@ -140,7 +140,7 @@ export default function ServicesPage() {
         <div className="max-w-7xl mx-auto relative">
           <div className="text-center mb-16">
             <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
-              Technologies We <span className="bg-gradient-to-r from-cyan-400 to-purple-600 bg-clip-text text-transparent">Master</span>
+              Technologies We <span className="bg-gradient-to-r from-orange-600 via-amber-600 to-yellow-600 bg-clip-text text-transparent">Master</span>
             </h2>
             <p className="text-xl text-gray-300 max-w-3xl mx-auto">
               Cutting-edge tools and frameworks for modern development
@@ -196,7 +196,7 @@ export default function ServicesPage() {
         <div className="max-w-4xl mx-auto text-center relative">
           <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
             Ready to Build Something
-            <span className="block bg-gradient-to-r from-cyan-400 to-purple-600 bg-clip-text text-transparent">
+            <span className="block bg-gradient-to-r from-orange-600 via-amber-600 to-yellow-600 bg-clip-text text-transparent">
               Amazing?
             </span>
           </h2>
@@ -206,7 +206,7 @@ export default function ServicesPage() {
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
             <Link to="/contact">
-              <button className="group bg-gradient-to-r from-cyan-500 to-purple-600 text-white px-10 py-4 rounded-full font-semibold hover:from-cyan-400 hover:to-purple-500 transition-all duration-300 transform hover:scale-105 flex items-center space-x-2">
+              <button className="group bg-gradient-to-r from-orange-500 via-orange-700 to-black text-white px-10 py-4 rounded-full font-semibold hover:from-cyan-400 hover:to-purple-500 transition-all duration-300 transform hover:scale-105 flex items-center space-x-2">
                 <span>Get Free Consultation</span>
                 <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
               </button>
