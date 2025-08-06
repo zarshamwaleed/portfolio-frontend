@@ -132,15 +132,16 @@ return (
 
   <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
     {/* Header */}
-    <header className={`text-center mb-16 transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
-      <h1 className="text-5xl md:text-7xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-orange-600 via-amber-600 to-yellow-600 mb-4 tracking-tight font-mono">
-        fetchExperience()
-      </h1>
+<header className={`text-center mb-16 transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
+  <h1 className="text-4xl sm:text-5xl md:text-7xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-orange-600 via-amber-600 to-yellow-600 mb-4 tracking-tight font-mono">
+    fetchExperience()
+  </h1>
 
-      <p className="text-xl text-slate-300 font-light max-w-2xl mx-auto">
-        Showcasing expertise in full-stack development and leadership
-      </p>
-    </header>
+  <p className="text-xl sm:text-2xl text-slate-300 font-light max-w-2xl mx-auto">
+    Showcasing expertise in full-stack development and leadership
+  </p>
+</header>
+
 
     {/* Stats Section */}
     <div className={`mb-16 transition-all duration-1000 delay-300 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
