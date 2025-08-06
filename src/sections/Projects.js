@@ -43,6 +43,12 @@ import ecom3 from "../images/ecom3.jpeg";
 import ecom4 from "../images/ecom4.jpeg";
 import ecom5 from "../images/ecom5.jpeg";
 
+import eld1 from "../images/eld1.png";
+import eld2 from "../images/eld2.png";
+import eld3 from "../images/eld3.png";
+import eld4 from "../images/eld4.png";
+import eld5 from "../images/eld5.png";
+
 const ProjectsPortfolio = () => {
   const [activeFilter, setActiveFilter] = useState('all');
   const [hoveredProject, setHoveredProject] = useState(null);
@@ -56,7 +62,9 @@ const ProjectsPortfolio = () => {
   3: [edu1, edu2, edu3, edu4, edu5],
   4: [traffic1, traffic2, traffic3],
   5: [flight1, flight2, flight3, flight4, flight5, flight6, flight7],
-  6: [ecom1, ecom2, ecom3, ecom4, ecom5]
+  6: [ecom1, ecom2, ecom3, ecom4, ecom5],
+  7: [eld1, eld2,eld3,eld4,eld5]
+
 };
 
 
@@ -213,7 +221,24 @@ const projects = [
       icon: Utensils,
       gradient: "from-amber-500 to-orange-600",
       // images: []
-    }
+    },
+    {
+  id: 7,
+  title: "Eldisa Cirogu Portfolio",
+  subtitle: "Healthcare Portfolio Website",
+  description: "A professional portfolio showcasing the expertise and achievements of Eldisa Cirogu in the healthcare industry.",
+  longDescription: "A personal portfolio website for Eldisa Cirogu, highlighting her work, experience, and contributions in the healthcare field. The website provides insight into her skills, projects, and passion for improving healthcare through innovative solutions.",
+  tech: ["HTML", "CSS", "JavaScript", "React", "Netlify"],
+  category: "portfolio",
+  type: "Healthcare",
+  duration: "Jul 2025",
+  liveUrl: "https://eldisa-cirogu.netlify.app/",
+  features: ["Responsive Design", "Project Showcases", "Contact Form", "Professional Branding"],
+  icon: Database,
+  gradient: "from-blue-500 to-cyan-600",
+  images: ["healthcare1.png", "healthcare2.png", "healthcare3.png"]
+}
+
   ];
 
 const categories = [

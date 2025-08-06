@@ -119,20 +119,21 @@ const Contact = () => {
   }}
 >
   <div className="max-w-5xl mx-auto px-6 lg:px-8">
-    {/* Header */}
-    <div
-      className={`text-center mb-20 transition-all duration-1000 ${
-        isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-5'
-      }`}
-    >
-      <h2 className="text-4xl sm:text-5xl font-bold font-mono bg-gradient-to-r from-orange-600 via-amber-600 to-yellow-600 bg-clip-text text-transparent">
-        {'<LetsWorkTogether />'}
-      </h2>
-      <p className="text-lg text-gray-300 mt-4">
-        Let’s connect and build something remarkable together.
-      </p>
-      <div className="w-24 h-1 mt-6 bg-gradient-to-r from-orange-600 via-amber-600 to-yellow-600 mx-auto rounded-full" />
-    </div>
+{/* Header */}
+<div
+  className={`text-center mb-20 transition-all duration-1000 ${
+    isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-5'
+  }`}
+>
+  <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold font-mono bg-gradient-to-r from-orange-600 via-amber-600 to-yellow-600 bg-clip-text text-transparent">
+    {'<LetsWorkTogether />'}
+  </h2>
+  <p className="text-lg sm:text-xl text-gray-300 mt-4">
+    Let’s connect and build something remarkable together.
+  </p>
+  <div className="w-24 h-1 mt-6 bg-gradient-to-r from-orange-600 via-amber-600 to-yellow-600 mx-auto rounded-full" />
+</div>
+
 
     {/* Contact Cards */}
     <div
